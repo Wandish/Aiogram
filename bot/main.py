@@ -13,12 +13,13 @@ bot = Bot(getenv('TEST_TOKEN')) #прочитать фай
 dp = Dispatcher(bot)
 
 
-@dp.message_handler(commands=['start', 'help'])
+@dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    """
-    This handler will be called when user sends `/start` or `/help` command
-    """
-    await message.reply("Hi!\nI'm EchoBot!\nPowered by aiogram.")
+    await bot.send_chat_action(message.chat.id, 'typing')
+    await message.answer(text=text.language_selection)
+    await message.answer(text=text.button_driver)
+    await message.answer(text=text.eng_button_driver)
+    # await message.delete()
 
 
 @dp.message_handler()
