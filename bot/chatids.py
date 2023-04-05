@@ -9,5 +9,3 @@ chatids_users = set ()
 for line in chatids_file:
     chatids_users.add(line.strip())
 chatids_file.close()
-#Создание словоря с iD и выбранным языком
-user_languages = {}
