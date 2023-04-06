@@ -1,6 +1,7 @@
-from chatids import dp,bot,chatids_users, logger,user_languages
+from bot import dp,bot,chatids_users, logger,user_languages
 from aiogram import executor, types
 import text
+
 
 # logging.basicConfig(level=logging.INFO)
 # Команда /start - выбор языка
@@ -16,9 +17,9 @@ async def language_selection(message: types.Message):
                 chatids_file.write(str(message.from_user.id) + "\n")
                 chatids_file.close()
         except FileNotFoundError as e:
-            print(e) #---Записать в логинг----
             # Создание chatids.txt
             open("chatids.txt", "w").close()
+            logger.error(e)
     kb = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     btn1 = types.KeyboardButton(text = "🇺🇦Українська")
     btn2 = types.KeyboardButton(text ="🇬🇧English")
@@ -61,5 +62,5 @@ async def main_menu(message: types.Message):
 
 
 if __name__ == '__main__':
-    logger.info("Запуск")  
+    logger.info("Старт")
     executor.start_polling(dp, skip_updates=True)
