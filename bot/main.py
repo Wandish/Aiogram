@@ -1,21 +1,8 @@
-from dotenv import load_dotenv, find_dotenv
-from os import getenv
-import logging
-from chatids import chatids_users
-from aiogram import Bot, Dispatcher, executor, types
+from chatids import dp,bot,chatids_users, logger,user_languages
+from aiogram import executor, types
 import text
 
-# Запись логов
-logging.basicConfig(level=logging.INFO)
-
-# Конфигурация
-load_dotenv(find_dotenv()) #подгрузить файл .env
-bot = Bot(getenv('TEST_TOKEN')) #прочитать фай
-dp = Dispatcher(bot)
-
-# Создание словоря с iD и выбранным языком
-user_languages = {}
-
+# logging.basicConfig(level=logging.INFO)
 # Команда /start - выбор языка
 @dp.message_handler(commands=['start'])
 async def language_selection(message: types.Message):
@@ -74,4 +61,5 @@ async def main_menu(message: types.Message):
 
 
 if __name__ == '__main__':
+    logger.info("Запуск")  
     executor.start_polling(dp, skip_updates=True)
