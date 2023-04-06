@@ -5,6 +5,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 from datetime import datetime
 
+
 # Конфигурация
 load_dotenv(find_dotenv()) #подгрузить файл .env
 bot = Bot(getenv('TEST_TOKEN')) #прочитать фай
@@ -23,8 +24,9 @@ for line in chatids_file:
     chatids_users.add(line.strip())
 chatids_file.close()
 
-# создаем логгер и задаем уровень логирования
-logger = logging.getLogger("main.py")
+
+# Создаем логгер и задаем уровень логирования
+logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 # создаем объект класса Formatter для форматирования вывода логов
 formatter = logging.Formatter('%(asctime)s (%(filename)s:%(lineno)d %(threadName)s %(funcName)s) %(levelname)s - %(name)s: "%(message)s"',' %Y.%m.%d %H:%M:%S')
